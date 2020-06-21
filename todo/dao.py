@@ -79,5 +79,5 @@ class DAOTask:
 
         with self.DB.connect() as conn:
             conn.execute(query)
-            log_query()
+            log_query(query)
             conn.commit()
