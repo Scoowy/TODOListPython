@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="TODOList DB" uuid="36284272-b739-4950-ac6f-d9d318f97861">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:C:\Users\Scoow\Documents\Proyectos\PyCharm\TODOList\data\todolst.db</jdbc-url>
+    </data-source>
+  </component>
+</project>
