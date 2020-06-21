@@ -66,6 +66,8 @@ class MainView(Frame):
 
     def __new_task(self, event):
         log_info('Botón {} pulsado'.format(self.btn_new_task.config('text')[-1]))
+        self.model.new_task(self.entry_name.get(), self.entry_description.get())
+        self.updateTables()
 
     def __modify_task(self, event):
         log_info('Botón {} pulsado'.format(self.btn_modify_task.config('text')[-1]))
@@ -75,3 +77,10 @@ class MainView(Frame):
 
     def __complete_task(self, event):
         log_info('Botón {} pulsado'.format(self.btn_complete_task.config('text')[-1]))
+
+    def updateTables(self):
+        for index in range(len(self.model.tasks)):
+            self.list_tasks.insert(index, self.model.tasks[index].name)
+
+        for index in range(len(self.model.complete_tasks)):
+            self.list_complete_tasks.insert(index, self.model.complete_tasks[index].name)

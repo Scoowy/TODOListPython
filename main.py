@@ -7,7 +7,7 @@ from todo.maincontroller import MainController
 
 def main():
     controller = MainController()
-    controller.test()
+    # controller.test()
     controller.run()
 
 

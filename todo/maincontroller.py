@@ -9,6 +9,7 @@ class MainController:
         self.root = Tk.Tk()
         self.model = Model()
         self.view = MainView(self.root, self.model)
+        self.update_tables()
 
     def run(self):
         self.root.title('TODO List')
@@ -24,3 +25,7 @@ class MainController:
 
         for task in self.model.complete_tasks:
             print(task)
+
+    def update_tables(self):
+        self.model.load_tasks()
+        self.view.updateTables()
