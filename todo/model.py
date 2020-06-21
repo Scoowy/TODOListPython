@@ -15,6 +15,12 @@ class Model:
                 return task
         return None
 
+    def get_task_complete(self, id_task: int):
+        for task in self.complete_tasks:
+            if task.get_id() == id_task:
+                return task
+        return None
+
     def load_tasks(self):
         log_info('Load tasks')
         self.tasks = self.dao.select_for_complete(False)
@@ -23,11 +29,13 @@ class Model:
     def new_task(self, name: str, description: str):
         task = Task(0, name, description)
         self.dao.create(task)
+        self.load_tasks()
 
     def delete_task(self, id_task: int):
         task = self.get_task(id_task)
         if task is not None:
             self.dao.delete(task)
+            self.load_tasks()
             return True
         else:
             return False
@@ -38,6 +46,7 @@ class Model:
             task.name = name
             task.description = description
             self.dao.update(task)
+            self.load_tasks()
             return True
         else:
             return False
@@ -47,6 +56,7 @@ class Model:
         if task is not None:
             task.close_todo()
             self.dao.update(task)
+            self.load_tasks()
             return True
         else:
             return False
