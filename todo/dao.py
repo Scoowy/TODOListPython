@@ -8,9 +8,12 @@ class DAOTask:
         self.DB = Connection('data/todolst.db')
 
     def create(self, task: Task):
+        query = """INSERT INTO tasks (name, description, complete)
+                    VALUES ('{}', '{}', '{}')""".format(task.name, task.description, str(task.complete))
+
         with self.DB.connect() as conn:
-            conn.execute("""INSERT INTO tasks (name, description, complete)
-                            VALUES (?, ?, ?)""", (task.name, task.description, task.is_complete()))
+            conn.execute(query)
+            log_query(query)
             conn.commit()
 
     def select_one(self, id_task: int):
@@ -29,9 +32,13 @@ class DAOTask:
 
     def select_all(self):
         tasks = []
+        query = """SELECT *
+                    FROM tasks"""
+
         with self.DB.connect() as conn:
-            cursor = conn.execute("""SELECT *
-                                        FROM tasks""")
+            cursor = conn.execute(query)
+            log_query(query)
+
             for row in cursor:
                 tasks.append(Task(row[0], row[1], row[2], row[3] == 'True'))
 
@@ -58,7 +65,7 @@ class DAOTask:
                         SET name        = '{}',
                             description = '{}',
                             complete    = '{}'
-                        WHERE id = {}""".format(task.name, task.description, task.complete, task.get_id())
+                        WHERE id = {}""".format(task.name, task.description, str(task.complete), task.get_id())
 
         with self.DB.connect() as conn:
             conn.execute(query)
@@ -66,8 +73,11 @@ class DAOTask:
             conn.commit()
 
     def delete(self, task: Task):
+        query = """DELETE
+                    FROM tasks
+                    WHERE id = '{}'""".format(task.get_id())
+
         with self.DB.connect() as conn:
-            conn.execute("""DELETE
-                            FROM tasks
-                            WHERE id = ?""", (task.get_id(),))
+            conn.execute(query)
+            log_query()
             conn.commit()
