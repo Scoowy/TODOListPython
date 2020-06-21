@@ -28,4 +28,4 @@ class MainController:
 
     def update_tables(self):
         self.model.load_tasks()
-        self.view.updateTables()
+        self.view.update_tables()
