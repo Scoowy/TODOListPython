@@ -2,17 +2,13 @@
 
 
 from todo.entities import Task
+from todo.maincontroller import MainController
 
 
 def main():
-    todo1 = Task(0, 'Nombre', 'Descripcion')
-
-    try:
-        todo1.name = ''
-    except ValueError as e:
-        print('ERROR: {}'.format(e))
-
-    print(todo1)
+    controller = MainController()
+    controller.test()
+    controller.run()
 
 
 if __name__ == '__main__':
