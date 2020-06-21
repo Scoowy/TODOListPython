@@ -1,15 +1,17 @@
 import datetime
 
-__string_log = '{} {}: {}'.format(datetime.datetime.now(), '{:^5}', '{}')
+
+def __format_log(type_log: str, message: str):
+    print('{:%Y-%m-%d %H:%M:%S} | {:^5} | {}'.format(datetime.datetime.now(), type_log, message))
 
 
 def log_query(message: str):
-    print(__string_log.format('QUERY', message.replace('\n', '').replace('\t', '').replace(' ' * 9, '')))
+    __format_log('QUERY', message.replace('\n', '').replace('\t', '').replace(' ' * 9, ''))
 
 
 def log_error(message: str):
-    print(__string_log.format('ERROR', message))
+    __format_log('ERROR', message)
 
 
 def log_info(message: str):
-    print(__string_log.format('INFO', message))
+    __format_log('INFO', message)
